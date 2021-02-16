@@ -6,4 +6,18 @@
 //  Copyright © 2021 Joanne Cheng. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class Coordinate: NSObject{
+    var lon: Double?
+    var lat: Double?
+    
+    init(dictionary:[String : Any]){
+        if let lon = dictionary["lon"] as? Double{
+            self.lon = lon
+        }
+        if let lat = dictionary["lat"] as? Double{
+            self.lat = lat
+        }
+    }
+}

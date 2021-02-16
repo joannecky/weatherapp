@@ -1,5 +1,5 @@
 //
-//  OpenWeatherMapManager.swift
+//  OpenWeatherManager.swift
 //  WeatherApp
 //
 //  Created by Joanne Cheng on 16/2/2021.
@@ -8,19 +8,48 @@
 
 import UIKit
 
-//enum openWeatherMapApi{
-//    case
-//    case currentWeatherByZipCode
-//    case currentWeatherByCoordinates
-//}
-
 class OpenWeatherManager: NSObject {
 
-    public static let shared = OpenWeatherMapManager()
+    public static let shared = OpenWeatherManager()
     public static let apiKey = "95d190a434083879a6398aafd54d9e73"
 
+    // MARK: - Current Weather
     public func getCurrentWeatherByCityName(cityName: String, completion: @escaping (_ success:Bool, _ result: CurrentWeather?, _ error: Error?, _ errorMessage: String?, _ statusCode: Int) -> Void) {
-        let url = "http://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(OpenWeatherMapManager.apiKey)"
+        let url = "http://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(OpenWeatherManager.apiKey)&units=metric"
+        callApi(url: url) { (success, result, error, errorMessage, statusCode) in
+            if result != nil, let r = result{
+                completion(success, CurrentWeather(dictionary: r), error, errorMessage, statusCode)
+            }else{
+                completion(success, nil, error, errorMessage, statusCode)
+            }
+        }
+    }
+    
+    public func getCurrentWeatherByZipCode(zipCode: String, completion: @escaping (_ success:Bool, _ result: CurrentWeather?, _ error: Error?, _ errorMessage: String?, _ statusCode: Int) -> Void) {
+        let url = "http://api.openweathermap.org/data/2.5/weather?q=\(zipCode),us&appid=\(OpenWeatherManager.apiKey)&units=metric"
+        callApi(url: url) { (success, result, error, errorMessage, statusCode) in
+            if result != nil, let r = result{
+                completion(success, CurrentWeather(dictionary: r), error, errorMessage, statusCode)
+            }else{
+                completion(success, nil, error, errorMessage, statusCode)
+            }
+        }
+    }
+    
+    public func getCurrentWeatherByCoordinates(lat: String, lon: String, completion: @escaping (_ success:Bool, _ result: CurrentWeather?, _ error: Error?, _ errorMessage: String?, _ statusCode: Int) -> Void) {
+        let url = "http://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(OpenWeatherManager.apiKey)&units=metric"
+        callApi(url: url) { (success, result, error, errorMessage, statusCode)
+            in
+            if result != nil, let r = result{
+                completion(success, CurrentWeather(dictionary: r), error, errorMessage, statusCode)
+            }else{
+                completion(success, nil, error, errorMessage, statusCode)
+            }
+        }
+    }
+    
+    // MARK: - Call Api
+    func callApi(url: String, completion: @escaping (_ success:Bool, _ result: [String: Any]?, _ error: Error?, _ errorMessage: String?, _ statusCode: Int) -> Void) {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -38,9 +67,12 @@ class OpenWeatherManager: NSObject {
             }
         
             if let responseObject = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any]{
-                let currentWeather = CurrentWeather(dictionary: responseObject)
-                completion(true, currentWeather, nil, "", -1)
+                completion(true, responseObject, nil, "", -1)
+                return
             }
+            
+            completion(false, nil, nil, nil, -1)
+            return
         }
         task.resume()
     }

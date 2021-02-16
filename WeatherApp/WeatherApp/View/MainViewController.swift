@@ -10,11 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController{
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
-    }
-    
+    // MARK: - Init
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -23,11 +19,28 @@ class MainViewController: UIViewController{
         super.init(coder: aDecoder)
     }
     
+    // MARK: - Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+    }
+    
+    // MARK: - Setup
     func setup(){
         self.view.backgroundColor = UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 1)
         setupNavigationBar()
+        OpenWeatherManager.shared.getCurrentWeatherByCityName(cityName: "hongkong") { (success, res, error, message, code) in
+            print(success)
+        }
+        OpenWeatherManager.shared.getCurrentWeatherByZipCode(zipCode: "94040") { (success, res, error, message, code) in
+            print(success)
+        }
+        OpenWeatherManager.shared.getCurrentWeatherByCoordinates(lat: "35", lon: "139") { (success, res, error, message, code) in
+            print(success)
+        }
     }
     
+    // MARK: - Navigation Bar
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 255/255, green: 229/255, blue: 204/255, alpha: 1)
         self.navigationController?.navigationBar.isTranslucent = false
