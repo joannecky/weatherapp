@@ -10,6 +10,8 @@ import UIKit
 
 class MainViewController: UIViewController{
     
+//    let vm: ListViewModel = ListViewModel()
+    
     // MARK: - Init
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -29,15 +31,18 @@ class MainViewController: UIViewController{
     func setup(){
         self.view.backgroundColor = UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 1)
         setupNavigationBar()
-        OpenWeatherManager.shared.getCurrentWeatherByCityName(cityName: "hongkong") { (success, res, error, message, code) in
-            print(success)
-        }
-        OpenWeatherManager.shared.getCurrentWeatherByZipCode(zipCode: "94040") { (success, res, error, message, code) in
-            print(success)
-        }
-        OpenWeatherManager.shared.getCurrentWeatherByCoordinates(lat: "35", lon: "139") { (success, res, error, message, code) in
-            print(success)
-        }
+//        CurrentWeatherService.shared.getCurrentWeatherByCityName(cityName: "hongkong") { (success, res, error, message, code) in
+//            print(success)
+//        }
+//        CurrentWeatherService.shared.getCurrentWeatherByZipCode(zipCode: "94040") { (success, res, error, message, code) in
+//            print(success)
+//        }
+//        CurrentWeatherService.shared.getCurrentWeatherByCoordinates(lat: "35", lon: "139") { (success, res, error, message, code) in
+//            print(success)
+//        }
+//        GeocodingService.shared.directGeocoding(input: "London") { (success, res, error, message, code) in
+//            print(success)
+//        }
     }
     
     // MARK: - Navigation Bar

@@ -23,6 +23,9 @@
 		F1C895B125DB978E0023D107 /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C895B025DB978E0023D107 /* Wind.swift */; };
 		F1C895B625DB979F0023D107 /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C895B525DB979F0023D107 /* Cloud.swift */; };
 		F1C895BB25DB97C00023D107 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C895BA25DB97C00023D107 /* System.swift */; };
+		F1C895C325DBBD6D0023D107 /* CurrentWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C895C225DBBD6D0023D107 /* CurrentWeatherService.swift */; };
+		F1C895CD25DBBFEE0023D107 /* GeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C895CC25DBBFEE0023D107 /* GeocodingService.swift */; };
+		F1C895D325DBC3C80023D107 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C895D225DBC3C80023D107 /* Geocoding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,9 @@
 		F1C895B025DB978E0023D107 /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
 		F1C895B525DB979F0023D107 /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
 		F1C895BA25DB97C00023D107 /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
+		F1C895C225DBBD6D0023D107 /* CurrentWeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherService.swift; sourceTree = "<group>"; };
+		F1C895CC25DBBFEE0023D107 /* GeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingService.swift; sourceTree = "<group>"; };
+		F1C895D225DBC3C80023D107 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				93DC6D1525DAF4AB001DE95A /* OpenWeatherManager.swift */,
+				F1C895CB25DBBF740023D107 /* Service */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -184,13 +191,8 @@
 		93DC6D1E25DB0A0C001DE95A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F1C8959325DB74680023D107 /* CurrentWeather.swift */,
-				F1C895B525DB979F0023D107 /* Cloud.swift */,
-				F1C895BA25DB97C00023D107 /* System.swift */,
-				F1C895A125DB973D0023D107 /* Coordinate.swift */,
-				F1C895A625DB97530023D107 /* Weather.swift */,
-				F1C895B025DB978E0023D107 /* Wind.swift */,
-				F1C895AB25DB977B0023D107 /* Main.swift */,
+				F1C895D125DBC3AD0023D107 /* Geocoding */,
+				F1C895CA25DBBF3A0023D107 /* CurrentWeather */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -214,6 +216,37 @@
 			children = (
 			);
 			path = String;
+			sourceTree = "<group>";
+		};
+		F1C895CA25DBBF3A0023D107 /* CurrentWeather */ = {
+			isa = PBXGroup;
+			children = (
+				F1C8959325DB74680023D107 /* CurrentWeather.swift */,
+				F1C895B525DB979F0023D107 /* Cloud.swift */,
+				F1C895BA25DB97C00023D107 /* System.swift */,
+				F1C895A125DB973D0023D107 /* Coordinate.swift */,
+				F1C895A625DB97530023D107 /* Weather.swift */,
+				F1C895B025DB978E0023D107 /* Wind.swift */,
+				F1C895AB25DB977B0023D107 /* Main.swift */,
+			);
+			path = CurrentWeather;
+			sourceTree = "<group>";
+		};
+		F1C895CB25DBBF740023D107 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F1C895C225DBBD6D0023D107 /* CurrentWeatherService.swift */,
+				F1C895CC25DBBFEE0023D107 /* GeocodingService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		F1C895D125DBC3AD0023D107 /* Geocoding */ = {
+			isa = PBXGroup;
+			children = (
+				F1C895D225DBC3C80023D107 /* Geocoding.swift */,
+			);
+			path = Geocoding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,12 +383,15 @@
 			files = (
 				F1C895BB25DB97C00023D107 /* System.swift in Sources */,
 				F1C8959425DB74680023D107 /* CurrentWeather.swift in Sources */,
+				F1C895D325DBC3C80023D107 /* Geocoding.swift in Sources */,
 				F1C895B625DB979F0023D107 /* Cloud.swift in Sources */,
 				93DC6D1C25DAFF93001DE95A /* MainViewController.swift in Sources */,
 				93DC6D1625DAF4AB001DE95A /* OpenWeatherManager.swift in Sources */,
+				F1C895CD25DBBFEE0023D107 /* GeocodingService.swift in Sources */,
 				93DC6CE625DAF164001DE95A /* AppDelegate.swift in Sources */,
 				F1C895A725DB97530023D107 /* Weather.swift in Sources */,
 				F1C895AC25DB977B0023D107 /* Main.swift in Sources */,
+				F1C895C325DBBD6D0023D107 /* CurrentWeatherService.swift in Sources */,
 				F1C895A225DB973D0023D107 /* Coordinate.swift in Sources */,
 				F1C895B125DB978E0023D107 /* Wind.swift in Sources */,
 			);
