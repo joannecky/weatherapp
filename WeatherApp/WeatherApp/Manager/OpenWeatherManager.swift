@@ -14,12 +14,13 @@ import UIKit
 //    case currentWeatherByCoordinates
 //}
 
-class OpenWeatherMapManager: NSObject {
+class OpenWeatherManager: NSObject {
 
-    public let apiKey = "95d190a434083879a6398aafd54d9e73"
-    
-    func getCurrentWeatherByCityName(cityName: String, completion: @escaping (_ success:Bool, _ result: [String: Any]?, _ error: Error?, _ errorMessage: String?, _ statusCode: Int) -> Void) {
-        let url = "api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(apiKey)"
+    public static let shared = OpenWeatherMapManager()
+    public static let apiKey = "95d190a434083879a6398aafd54d9e73"
+
+    public func getCurrentWeatherByCityName(cityName: String, completion: @escaping (_ success:Bool, _ result: CurrentWeather?, _ error: Error?, _ errorMessage: String?, _ statusCode: Int) -> Void) {
+        let url = "http://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(OpenWeatherMapManager.apiKey)"
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -36,8 +37,10 @@ class OpenWeatherMapManager: NSObject {
                 return
             }
         
-            let responseObject = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any]
-            completion(true, responseObject, nil, "", -1)
+            if let responseObject = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any]{
+                let currentWeather = CurrentWeather(dictionary: responseObject)
+                completion(true, currentWeather, nil, "", -1)
+            }
         }
         task.resume()
     }
