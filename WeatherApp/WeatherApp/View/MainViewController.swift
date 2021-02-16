@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController{
     
-//    let vm: ListViewModel = ListViewModel()
+    let vm: [ListViewModel]? = [ListViewModel]()
     
     // MARK: - Init
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
