@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Geocoding: NSObject{
+@objc
+class Geocoding: NSObject, Codable{
     var name: String?
     var lat: Double?
     var lon: Double?

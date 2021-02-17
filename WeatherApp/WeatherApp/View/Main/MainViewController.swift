@@ -10,13 +10,13 @@ import UIKit
 
 class MainViewController: UIViewController{
     
-    let vm: [ListViewModel]? = [ListViewModel]()
+    var vm: MainViewModel = MainViewModel()
     
     // MARK: - Init
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -31,20 +31,15 @@ class MainViewController: UIViewController{
     func setup(){
         self.view.backgroundColor = UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 1)
         setupNavigationBar()
-//        CurrentWeatherService.shared.getCurrentWeatherByCityName(cityName: "hongkong") { (success, res, error, message, code) in
-//            print(success)
-//        }
-//        CurrentWeatherService.shared.getCurrentWeatherByZipCode(zipCode: "94040") { (success, res, error, message, code) in
-//            print(success)
-//        }
-//        CurrentWeatherService.shared.getCurrentWeatherByCoordinates(lat: "35", lon: "139") { (success, res, error, message, code) in
-//            print(success)
-//        }
-//        GeocodingService.shared.directGeocoding(input: "London") { (success, res, error, message, code) in
-//            print(success)
-//        }
     }
     
+//    func setupTableView(){
+//         tableview.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: "ListTableViewCell")
+//         tableview.dataSource = self
+//         tableview.delegate = self
+//         tableview.reloadData()
+//     }
+//
     // MARK: - Navigation Bar
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 255/255, green: 229/255, blue: 204/255, alpha: 1)
@@ -52,7 +47,25 @@ class MainViewController: UIViewController{
         self.navigationController?.navigationBar.alpha = 1
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        self.title = "Weather App"
+        self.title = "My Weather"
     }
-    
 }
+
+//extension MainViewController: UITableViewDelegate, UITableViewDataSource{
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return list.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableview.dequeueReusableCell(withIdentifier: "ListTableViewCell") as! ListTableViewCell
+//        cell.reset()
+//        cell.loadData(model: list[indexPath.row])
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        var vc = DetailViewController()
+//        vc.model = list[indexPath.row]
+//        self.navigationController?.pushViewController(vc, animated: true)
+//    }
+//}
