@@ -11,6 +11,7 @@ import UIKit
 class System: NSObject{
     var type: Int?
     var id: Int?
+    var message: String?
     var country: String?
     var sunrise: Int?
     var sunset: Int?
@@ -21,6 +22,9 @@ class System: NSObject{
         }
         if let id = dictionary["id"] as? Int{
             self.id = id
+        }
+        if let message = dictionary["message"] as? String{
+            self.message = message
         }
         if let country = dictionary["country"] as? String{
             self.country = country

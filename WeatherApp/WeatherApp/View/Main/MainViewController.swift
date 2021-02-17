@@ -10,6 +10,24 @@ import UIKit
 
 class MainViewController: UIViewController{
     
+    @IBOutlet weak var vLocation: UIView!
+    @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak var lblLocation: UILabel!
+    
+    @IBOutlet weak var vWeather: UIView!
+    @IBOutlet weak var imgWeather: UIImageView!
+    @IBOutlet weak var lblWeatherTitle: UILabel!
+    @IBOutlet weak var lblWeatherDesc: UILabel!
+    
+    @IBOutlet weak var vTemp: UIView!
+    @IBOutlet weak var lblTemp: UILabel!
+    @IBOutlet weak var lblTempMin: UILabel!
+    @IBOutlet weak var lblTempMax: UILabel!
+    @IBOutlet weak var imgTempMin: UIImageView!
+    @IBOutlet weak var imgTempMax: UIImageView!
+    
+    @IBOutlet weak var vMain: UICollectionView!
+    
     var vm: MainViewModel = MainViewModel()
     
     // MARK: - Init
@@ -31,6 +49,7 @@ class MainViewController: UIViewController{
     func setup(){
         self.view.backgroundColor = UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 1)
         setupNavigationBar()
+        setupContent()
     }
     
 //    func setupTableView(){
@@ -47,7 +66,43 @@ class MainViewController: UIViewController{
         self.navigationController?.navigationBar.alpha = 1
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        self.title = "My Weather"
+        self.title = "My Weather"
+        setupNavigationBarRightBarButton()
+    }
+    
+    private func setupNavigationBarRightBarButton() {
+        let itemButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+        itemButton.widthAnchor.constraint(equalToConstant: itemButton.frame.width).isActive = true
+        itemButton.heightAnchor.constraint(equalToConstant: itemButton.frame.height).isActive = true
+        itemButton.setImage(UIImage(systemName: "search") , for: .normal)
+        itemButton.addTarget(self, action: #selector(ClickSearchButton), for: .touchUpInside)
+        itemButton.transform = CGAffineTransform(translationX: 10 , y: 0)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: itemButton)
+    }
+    
+    @objc private func ClickSearchButton() {
+        var vc = BookmarkViewController()
+         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func setupContent(){
+        self.title = vm.location?.name
+        self.lblLocation.text = vm.location?.name
+        if let state = vm.location?.state, state != ""{
+            self.lblLocation.text = self.lblLocation.text ?? "" + ", \(state)"
+            if let country = vm.location?.country, country != ""{
+                self.lblLocation.text = self.lblLocation.text ?? "" + ", \(country)"
+            }
+        }
+        self.lblDate.text = ""
+        
+        self.lblWeatherTitle.text = vm.weather?.weather?.main
+        self.lblWeatherDesc.text = vm.weather?.weather?.desc
+        if let id = vm.weather?.weather?.icon{
+            let url = URL(string: " http://openweathermap.org/img/wn/\(id)@2x.png")
+            let data = try? Data(contentsOf: url!)
+            self.imgWeather.image = UIImage(data: data!)
+        }
     }
 }
 

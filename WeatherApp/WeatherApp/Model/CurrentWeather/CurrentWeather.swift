@@ -16,6 +16,8 @@ class CurrentWeather: NSObject{
     var visibility: Int?
     var wind: Wind?
     var clouds: Cloud?
+    var rain: Rain?
+    var snow: Snow?
     var dt: Int?
     var sys: System?
     var timezone:Int?
@@ -44,6 +46,12 @@ class CurrentWeather: NSObject{
         }
         if let clouds = dictionary["clouds"] as? [String : Any]{
             self.clouds = Cloud(dictionary: clouds)
+        }
+        if let rain = dictionary["rain"] as? [String : Any]{
+            self.rain = Rain(dictionary: rain)
+        }
+        if let snow = dictionary["snow"] as? [String : Any]{
+            self.snow = Snow(dictionary: snow)
         }
         if let dt = dictionary["dt"] as? Int{
             self.dt = dt

@@ -11,6 +11,7 @@ import Foundation
 class MainViewModel: NSObject{
     
     var weather: CurrentWeather?
+    var location: Geocoding?
     
     override init() {
         super.init()
@@ -20,6 +21,7 @@ class MainViewModel: NSObject{
     func setup(){
         if let location = UserDefaults.getLocationList().first, let lat = location.lat, let lon = location.lon{
             CurrentWeatherService.shared.getCurrentWeatherByCoordinates(lat: String(lat), lon: String(lon)){ (success, result, error, errorMessage, statusCode) in
+                self.location = location
                 self.weather = result
             }
         }
