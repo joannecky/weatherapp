@@ -66,23 +66,24 @@ class MainViewController: UIViewController{
         self.navigationController?.navigationBar.alpha = 1
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        self.title = "My Weather"
+        self.title = "My Weather" 
         setupNavigationBarRightBarButton()
     }
     
     private func setupNavigationBarRightBarButton() {
-        let itemButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+        let itemButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         itemButton.widthAnchor.constraint(equalToConstant: itemButton.frame.width).isActive = true
         itemButton.heightAnchor.constraint(equalToConstant: itemButton.frame.height).isActive = true
-        itemButton.setImage(UIImage(systemName: "search") , for: .normal)
+        itemButton.setImage(UIImage(named: "search")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+        itemButton.tintColor = UIColor.systemOrange
         itemButton.addTarget(self, action: #selector(ClickSearchButton), for: .touchUpInside)
-        itemButton.transform = CGAffineTransform(translationX: 10 , y: 0)
+        itemButton.transform = CGAffineTransform(translationX: 5 , y: -5)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: itemButton)
     }
     
     @objc private func ClickSearchButton() {
-        var vc = BookmarkViewController()
-         self.navigationController?.pushViewController(vc, animated: true)
+        let v = SearchView()
+        PopoverView.showAlertView(content: v)
     }
     
     func setupContent(){
