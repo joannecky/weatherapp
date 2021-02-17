@@ -15,25 +15,29 @@ class OpenWeatherManager: NSObject {
 
     // MARK: - Call Api
     public func callApi(url: String, completion: @escaping (_ success:Bool, _ result: Data?, _ error: Error?, _ errorMessage: String?, _ statusCode: Int) -> Void) {
-        var request = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "GET"
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                print("error=\(String(describing: error))")
-                completion(false, nil, error, error?.localizedDescription, -1)
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(String(describing: response))")
-                completion(false, nil, nil, "Failed in Http call, Status Code = \(httpStatus.statusCode)", httpStatus.statusCode)
-                return
-            }
+        var url = url.replacingOccurrences(of: " ", with: "")
+        url = url.replacingOccurrences(of: "ø", with: "o")
+        if let url = URL(string: url){
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    print("error=\(String(describing: error))")
+                    completion(false, nil, error, error?.localizedDescription, -1)
+                    return
+                }
+                
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                    print("response = \(String(describing: response))")
+                    completion(false, nil, nil, "Failed in Http call, Status Code = \(httpStatus.statusCode)", httpStatus.statusCode)
+                    return
+                }
 
-            completion(true, data, nil, "", -1)
-            return
+                completion(true, data, nil, "", -1)
+                return
+            }
+            task.resume()
         }
-        task.resume()
     }
 }

@@ -34,7 +34,7 @@ class MainViewController: UIViewController{
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -47,18 +47,13 @@ class MainViewController: UIViewController{
     
     // MARK: - Setup
     func setup(){
-        self.view.backgroundColor = UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 1)
+        self.view.backgroundColor = UIColor.white
+        self.vm.delegate = self
         setupNavigationBar()
+        setupCollectionView()
         setupContent()
     }
     
-//    func setupTableView(){
-//         tableview.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: "ListTableViewCell")
-//         tableview.dataSource = self
-//         tableview.delegate = self
-//         tableview.reloadData()
-//     }
-//
     // MARK: - Navigation Bar
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 255/255, green: 229/255, blue: 204/255, alpha: 1)
@@ -71,57 +66,142 @@ class MainViewController: UIViewController{
     }
     
     private func setupNavigationBarRightBarButton() {
-        let itemButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let itemButton = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
         itemButton.widthAnchor.constraint(equalToConstant: itemButton.frame.width).isActive = true
         itemButton.heightAnchor.constraint(equalToConstant: itemButton.frame.height).isActive = true
         itemButton.setImage(UIImage(named: "search")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
         itemButton.tintColor = UIColor.systemOrange
         itemButton.addTarget(self, action: #selector(ClickSearchButton), for: .touchUpInside)
-        itemButton.transform = CGAffineTransform(translationX: 5 , y: -5)
+        itemButton.transform = CGAffineTransform(translationX: 5 , y: 0)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: itemButton)
     }
     
+    func setupCollectionView(){
+        vMain.delegate = self
+        vMain.dataSource = self
+        vMain.register(UINib.init(nibName: "WeatherCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "WeatherCollectionViewCell")
+        vMain.backgroundColor = UIColor(red: 255/255, green: 229/255, blue: 204/255, alpha: 1)
+        vMain.layer.cornerRadius = 5
+    }
+    
     @objc private func ClickSearchButton() {
-        let v = SearchView()
-        PopoverView.showAlertView(content: v)
+        let v = SearchView.showAlertView()
+        v.searchDelegate = self
+    }
+    
+    func reset(){
+        DispatchQueue.main.async {
+            self.title = "My Weather"
+            self.lblLocation.text = ""
+            self.lblDate.text = ""
+            
+            self.lblWeatherTitle.text = ""
+            self.lblWeatherDesc.text = ""
+            self.imgWeather.image = nil
+            
+            self.lblTemp.text = ""
+            self.lblTempMin.text = ""
+            self.lblTempMax.text = ""
+            
+            self.vTemp.isHidden = true
+            self.imgTempMin.image = nil
+            self.imgTempMax.image = nil
+            
+            self.vMain.isHidden = true
+        }
     }
     
     func setupContent(){
-        self.title = vm.location?.name
-        self.lblLocation.text = vm.location?.name
-        if let state = vm.location?.state, state != ""{
-            self.lblLocation.text = self.lblLocation.text ?? "" + ", \(state)"
-            if let country = vm.location?.country, country != ""{
-                self.lblLocation.text = self.lblLocation.text ?? "" + ", \(country)"
+        reset()
+        if vm.location != nil{
+            DispatchQueue.main.async {
+                self.title = self.vm.location?.name
+                self.lblLocation.text = self.vm.location?.fullName()
+                self.lblDate.text = ""
+                self.lblWeatherTitle.text = self.vm.weather?.weather?.main
+                self.lblWeatherDesc.text = self.vm.weather?.weather?.desc
+                self.lblWeatherDesc.textColor = UIColor.darkGray
+                self.lblWeatherDesc.numberOfLines = 0
+                self.lblWeatherDesc.sizeToFit()
+                if let id = self.vm.weather?.weather?.icon{
+                    if let url = URL(string: "http://openweathermap.org/img/wn/\(id)@2x.png"){
+                        let data = try? Data(contentsOf: url)
+                        self.imgWeather.image = UIImage(data: data!)
+                    }
+                }
+                
+                self.vTemp.isHidden = false
+                if let temp = self.vm.weather?.main?.temp{
+                    self.lblTemp.text = "\(round(temp*10)/10) °C"
+                }
+                if let temp_min = self.vm.weather?.main?.temp_min{
+                    self.lblTempMin.text = "\(round(temp_min*10)/10) °C"
+                }
+                if let temp_max = self.vm.weather?.main?.temp_max{
+                    self.lblTempMax.text = "\(round(temp_max*10)/10) °C"
+                }
+                self.imgTempMin.image = UIImage(named: "temp")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+                self.imgTempMin.tintColor = UIColor.systemBlue
+                self.imgTempMax.image = UIImage(named: "temp")
+                self.imgTempMax.tintColor = UIColor.systemRed
+                
+                if(self.vm.list?.count ?? 0 > 0){
+                    self.vMain.isHidden = false
+                }
+                self.vMain.reloadData()
             }
-        }
-        self.lblDate.text = ""
-        
-        self.lblWeatherTitle.text = vm.weather?.weather?.main
-        self.lblWeatherDesc.text = vm.weather?.weather?.desc
-        if let id = vm.weather?.weather?.icon{
-            let url = URL(string: " http://openweathermap.org/img/wn/\(id)@2x.png")
-            let data = try? Data(contentsOf: url!)
-            self.imgWeather.image = UIImage(data: data!)
         }
     }
 }
 
-//extension MainViewController: UITableViewDelegate, UITableViewDataSource{
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return list.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableview.dequeueReusableCell(withIdentifier: "ListTableViewCell") as! ListTableViewCell
-//        cell.reset()
-//        cell.loadData(model: list[indexPath.row])
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        var vc = DetailViewController()
-//        vc.model = list[indexPath.row]
-//        self.navigationController?.pushViewController(vc, animated: true)
-//    }
-//}
+extension MainViewController: SearchViewDelegate{
+    func display(model: Geocoding){
+        vm.display(location: model)
+    }
+}
+
+extension MainViewController: MainViewModelDelegate{
+    func reload(){
+        setupContent()
+    }
+}
+
+extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.vm.list?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        view.layer.zPosition = 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize.zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize.zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize.init(width: collectionView.frame.size.width / CGFloat(self.vm.list?.count ?? 0), height: 75)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell:WeatherCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCollectionViewCell", for: indexPath) as! WeatherCollectionViewCell
+        cell.reset()
+        if let model = self.vm.list?[indexPath.row]{
+            cell.loadData(model: model)
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
+}

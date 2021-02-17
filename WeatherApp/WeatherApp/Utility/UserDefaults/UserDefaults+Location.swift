@@ -37,6 +37,11 @@ extension UserDefaults {
     
     @objc static func addLocation(model: Geocoding){
         let list = getLocationList()
+        for i in 0..<list.count{
+            if((list[i].name == model.name) && (list[i].state == model.state) && (list[i].country == model.country)){
+                return
+            }
+        }
         var new = [model]
         new.append(contentsOf: list)
         saveLocationList(list: new)

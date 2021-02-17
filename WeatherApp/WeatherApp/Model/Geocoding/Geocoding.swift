@@ -33,4 +33,18 @@ class Geocoding: NSObject, Codable{
             self.state = state
         }
     }
+    
+    func fullName() -> String{
+        if let name = self.name{
+            var string: String = name
+            if let country = self.country, country != ""{
+                string = "\(string), \(country)"
+                if let state = self.state, state != ""{
+                    string = "\(string), \(state)"
+                }
+            }
+            return string
+        }
+        return ""
+    }
 }
