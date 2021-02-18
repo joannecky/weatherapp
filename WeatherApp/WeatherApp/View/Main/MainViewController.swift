@@ -28,6 +28,9 @@ class MainViewController: UIViewController{
     @IBOutlet weak var imgTempMin: UIImageView!
     @IBOutlet weak var imgTempMax: UIImageView!
     
+    @IBOutlet weak var lblSunrise: UILabel!
+    @IBOutlet weak var lblSunset: UILabel!
+    
     @IBOutlet weak var vMain: UICollectionView!
     
     var vm: MainViewModel = MainViewModel()
@@ -111,6 +114,9 @@ class MainViewController: UIViewController{
             self.lblTempMin.text = ""
             self.lblTempMax.text = ""
             
+            self.lblSunset.text = ""
+            self.lblSunrise.text = ""
+            
             self.vTemp.isHidden = true
             self.imgTempMin.image = nil
             self.imgTempMax.image = nil
@@ -153,6 +159,28 @@ class MainViewController: UIViewController{
                 self.imgTempMin.tintColor = UIColor.systemBlue
                 self.imgTempMax.image = UIImage(named: "temp")
                 self.imgTempMax.tintColor = UIColor.systemRed
+                
+                if let sunset = self.vm.weather?.sys?.sunrise, let timezone = self.vm.weather?.timezone{
+                    let epochTime = TimeInterval(sunset+timezone)
+                    let date = Date(timeIntervalSince1970: epochTime)
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.calendar = Calendar(identifier: .iso8601)
+                    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+                    dateFormatter.dateFormat = "hh:mm a"
+                    self.lblSunrise.text = "Sunrise: \(dateFormatter.string(from: date))"
+                }
+                
+                if let sunset = self.vm.weather?.sys?.sunset, let timezone = self.vm.weather?.timezone{
+                      let epochTime = TimeInterval(sunset+timezone)
+                      let date = Date(timeIntervalSince1970: epochTime)
+                      let dateFormatter = DateFormatter()
+                      dateFormatter.calendar = Calendar(identifier: .iso8601)
+                      dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                      dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+                      dateFormatter.dateFormat = "hh:mm a"
+                    self.lblSunset.text = "Sunset: \(dateFormatter.string(from: date))"
+                  }
                 
                 if(self.vm.list?.count ?? 0 > 0){
                     self.vMain.isHidden = false
@@ -213,9 +241,9 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:WeatherCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCollectionViewCell", for: indexPath) as! WeatherCollectionViewCell
         cell.reset()
-          if let r = vm.list, r.indices.contains(indexPath.row){
-              cell.loadData(model: r[indexPath.row])
-          }
+        if let r = vm.list, r.indices.contains(indexPath.row){
+            cell.loadData(model: r[indexPath.row])
+        }
         return cell
     }
     
