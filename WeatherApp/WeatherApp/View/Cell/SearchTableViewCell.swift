@@ -11,7 +11,9 @@ import UIKit
 class SearchTableViewCell: UITableViewCell {
 
     @IBOutlet var lblTitle: UILabel!
-
+    @IBOutlet weak var imgEdit: UIImageView!
+    @IBOutlet weak var nsTitleLeading: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.initUI()
@@ -31,9 +33,20 @@ class SearchTableViewCell: UITableViewCell {
     // MARK: - Reset
     func reset(){
         self.lblTitle.text = ""
+        self.nsTitleLeading.constant = 5
+        self.imgEdit.image = nil
     }
     
-    func loadData(model : Geocoding) {
-        self.lblTitle.text = model.fullName()
+    func loadData(model : SearchDisplayModel, isEditing: Bool) {
+        self.lblTitle.text = model.title
+        if isEditing{
+            if model.isSelected{
+                imgEdit.image = UIImage(named: "checkbox")
+            }else{
+                imgEdit.image = UIImage(named: "uncheckbox")
+            }
+        }else{
+            self.nsTitleLeading.constant = -25
+        }
     }
 }

@@ -56,10 +56,11 @@ class SearchView: UIView{
     }
     
     func setupSearchBar() {
-        self.btnGps.tintColor = UIColor(named: "secondaryColor")
-        self.btnGps.setImage(UIImage(named: "gps"), for: .normal)
-        self.searchbar.delegate = self
-        
+        if(!vm.isEditing){
+            self.btnGps.tintColor = UIColor(named: "secondaryColor")
+            self.btnGps.setImage(UIImage(named: "gps"), for: .normal)
+            self.searchbar.delegate = self
+        }
     }
     
     func setupTableView(){
@@ -114,6 +115,14 @@ extension SearchView: SearchViewModelDelegate{
 }
 
 extension SearchView: UISearchBarDelegate{
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        if(self.vm.isEditing){
+            return false
+        }else{
+            return true
+        }
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let input = searchBar.text, input != ""{
             let decimalDigits = NSCharacterSet.decimalDigits
@@ -143,36 +152,73 @@ extension SearchView: UISearchBarDelegate{
 
 extension SearchView: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return vm.list?.count ?? 0
+        return vm.list.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableview.dequeueReusableCell(withIdentifier: "SearchTableViewCell") as! SearchTableViewCell
         cell.reset()
-        if let list = vm.list, list.indices.contains(indexPath.row){
-            cell.loadData(model: list[indexPath.row])
+        if(vm.isSearching){
+            if vm.list.indices.contains(indexPath.row){
+                cell.loadData(model: vm.list[indexPath.row], isEditing: false)
+            }
+        }else{
+            if vm.list.indices.contains(indexPath.row){
+                cell.loadData(model: vm.list[indexPath.row], isEditing: vm.isEditing)
+            }
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let list = vm.list, list.indices.contains(indexPath.row){
-            if(vm.isSearching){
-                UserDefaults.addLocation(model: list[indexPath.row])
+        if(vm.isEditing){
+            vm.list[indexPath.row].isSelected = !vm.list[indexPath.row].isSelected
+            tableview.reloadData()
+        }else{
+            if vm.list.indices.contains(indexPath.row){
+                if(vm.isSearching){
+                    UserDefaults.addLocation(model: vm.data[indexPath.row])
+                }
+                searchDelegate?.display(model: vm.data[indexPath.row])
+                delegate?.closePopoverView()
             }
-            searchDelegate?.display(model: list[indexPath.row])
-            delegate?.closePopoverView()
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableview.dequeueReusableHeaderFooterView(withIdentifier: "SearchTableViewHeader") as! SearchTableViewHeader
         header.reset()
-        header.loadData(isSearching: vm.isSearching)
+        let hasRecord = (self.vm.list.count > 0)
+        header.loadData(isSearching: vm.isSearching, hasRecord: hasRecord, isEditing: vm.isEditing)
+        header.delegate = self
         return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 32
+    }
+}
+
+extension SearchView: SearchTableViewHeaderDelegate{
+    func edit(){
+        vm.isEditing = true
+        tableview.reloadData()
+    }
+    
+    func delete(){
+        var new: [Geocoding] = []
+        for i in 0 ..< vm.list.count{
+            if(vm.list[i].isSelected == false){
+                new.append(vm.data[i])
+            }
+        }
+        UserDefaults.saveLocationList(list: new)
+        vm.isEditing = false
+        vm.displaySaved()
+    }
+    
+    func cancel(){
+        vm.isEditing = false
+        tableview.reloadData()
     }
 }

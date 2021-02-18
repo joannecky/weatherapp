@@ -22,11 +22,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="yEd-Hg-SAN">
-                    <rect key="frame" x="0.0" y="0.0" width="359" height="35"/>
+                    <rect key="frame" x="0.0" y="5" width="359" height="56"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Z0-Cj-9pj">
-                    <rect key="frame" x="369" y="0.0" width="35" height="35"/>
+                    <rect key="frame" x="369" y="15.5" width="35" height="35"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="35" id="7L0-rP-Yxc"/>
                         <constraint firstAttribute="height" constant="35" id="lhM-Me-DqQ"/>
@@ -37,7 +37,7 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="epb-ac-Ppg">
-                    <rect key="frame" x="0.0" y="45" width="414" height="764"/>
+                    <rect key="frame" x="0.0" y="66" width="414" height="743"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <color key="tintColor" systemColor="systemOrangeColor"/>
                 </tableView>
@@ -46,14 +46,13 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="epb-ac-Ppg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6CJ-FT-F8N"/>
-                <constraint firstItem="epb-ac-Ppg" firstAttribute="top" secondItem="yEd-Hg-SAN" secondAttribute="bottom" constant="10" id="JCl-G0-4Eg"/>
+                <constraint firstItem="epb-ac-Ppg" firstAttribute="top" secondItem="yEd-Hg-SAN" secondAttribute="bottom" constant="5" id="JCl-G0-4Eg"/>
+                <constraint firstItem="yEd-Hg-SAN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="Kgy-N5-40s"/>
                 <constraint firstAttribute="trailing" secondItem="9Z0-Cj-9pj" secondAttribute="trailing" constant="10" id="Tzq-TW-7SN"/>
                 <constraint firstItem="9Z0-Cj-9pj" firstAttribute="leading" secondItem="yEd-Hg-SAN" secondAttribute="trailing" constant="10" id="W6t-G8-MSH"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="epb-ac-Ppg" secondAttribute="trailing" id="YXN-jm-ipw"/>
                 <constraint firstItem="9Z0-Cj-9pj" firstAttribute="centerY" secondItem="yEd-Hg-SAN" secondAttribute="centerY" id="ZvQ-zW-EKc"/>
                 <constraint firstItem="yEd-Hg-SAN" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bPb-66-usf"/>
-                <constraint firstItem="yEd-Hg-SAN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fkv-HD-dkl"/>
-                <constraint firstItem="9Z0-Cj-9pj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ymf-i8-j1x"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="epb-ac-Ppg" secondAttribute="bottom" id="zKB-Th-m4w"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

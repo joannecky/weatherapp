@@ -16,22 +16,53 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8d-MR-2p0">
-                    <rect key="frame" x="12" y="49" width="390" height="47"/>
+                    <rect key="frame" x="12" y="49" width="35.5" height="47"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Crh-4E-Evf">
+                    <rect key="frame" x="356" y="49" width="46" height="47"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="btnEditPressed:" destination="-2" eventType="touchUpInside" id="bgf-kD-iIo"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rsb-pe-esA">
+                    <rect key="frame" x="356" y="57.5" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="btnCancelPressed:" destination="-2" eventType="touchUpInside" id="Kqo-pE-ZHL"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9f-QY-Ba4">
+                    <rect key="frame" x="300" y="57.5" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="btnDeletePressed:" destination="-2" eventType="touchUpInside" id="7Fu-oP-2FZ"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="Crh-4E-Evf" firstAttribute="centerY" secondItem="O8d-MR-2p0" secondAttribute="centerY" id="2AG-jg-TZU"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Crh-4E-Evf" secondAttribute="trailing" constant="12" id="42G-wL-g6K"/>
+                <constraint firstItem="P9f-QY-Ba4" firstAttribute="centerY" secondItem="Crh-4E-Evf" secondAttribute="centerY" id="9KU-1m-enL"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rsb-pe-esA" secondAttribute="trailing" constant="12" id="JPh-WW-t7g"/>
+                <constraint firstItem="Crh-4E-Evf" firstAttribute="bottom" secondItem="O8d-MR-2p0" secondAttribute="bottom" id="Jap-uI-dgZ"/>
+                <constraint firstItem="rsb-pe-esA" firstAttribute="leading" secondItem="P9f-QY-Ba4" secondAttribute="trailing" constant="10" id="Odc-CI-yd1"/>
                 <constraint firstItem="O8d-MR-2p0" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="bwl-CB-FcM"/>
                 <constraint firstItem="O8d-MR-2p0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="e08-9C-HLj"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="O8d-MR-2p0" secondAttribute="trailing" constant="12" id="m2T-2J-dVS"/>
+                <constraint firstItem="Crh-4E-Evf" firstAttribute="top" secondItem="O8d-MR-2p0" secondAttribute="top" id="gJt-yR-Cj9"/>
+                <constraint firstItem="rsb-pe-esA" firstAttribute="centerY" secondItem="Crh-4E-Evf" secondAttribute="centerY" id="iHL-2O-VwD"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="O8d-MR-2p0" secondAttribute="bottom" constant="5" id="mzo-md-gqR"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="btnCancel" destination="rsb-pe-esA" id="Niz-YB-dAC"/>
+                <outlet property="btnDelete" destination="P9f-QY-Ba4" id="fVC-Rb-pdD"/>
+                <outlet property="btnEdit" destination="Crh-4E-Evf" id="E4V-RR-XGk"/>
                 <outlet property="lblHeader" destination="O8d-MR-2p0" id="eHM-7b-mFp"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="371.98660714285711"/>

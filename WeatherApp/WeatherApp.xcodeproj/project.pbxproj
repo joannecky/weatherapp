@@ -43,6 +43,7 @@
 		F1C895EE25DCC13C0023D107 /* Rain.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C895ED25DCC13C0023D107 /* Rain.swift */; };
 		F1C895F325DCC1440023D107 /* Snow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C895F225DCC1440023D107 /* Snow.swift */; };
 		F1C895F925DCDF890023D107 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C895F825DCDF890023D107 /* PopoverView.swift */; };
+		F1DDD22825DE69F000D2606C /* SearchDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DDD22725DE69F000D2606C /* SearchDisplayModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		F1C895ED25DCC13C0023D107 /* Rain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rain.swift; sourceTree = "<group>"; };
 		F1C895F225DCC1440023D107 /* Snow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snow.swift; sourceTree = "<group>"; };
 		F1C895F825DCDF890023D107 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
+		F1DDD22725DE69F000D2606C /* SearchDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDisplayModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				93AC7EEC25DD873E00AA70E0 /* WeatherCollectionDisplayModel.swift */,
+				F1DDD22725DE69F000D2606C /* SearchDisplayModel.swift */,
 			);
 			path = DisplayModel;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				F1C895AC25DB977B0023D107 /* Main.swift in Sources */,
 				F1C895C325DBBD6D0023D107 /* CurrentWeatherService.swift in Sources */,
 				F1C895A225DB973D0023D107 /* Coordinate.swift in Sources */,
+				F1DDD22825DE69F000D2606C /* SearchDisplayModel.swift in Sources */,
 				F1C895F325DCC1440023D107 /* Snow.swift in Sources */,
 				F1C895B125DB978E0023D107 /* Wind.swift in Sources */,
 				F1C895EE25DCC13C0023D107 /* Rain.swift in Sources */,
