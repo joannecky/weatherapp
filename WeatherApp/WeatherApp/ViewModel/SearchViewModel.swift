@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol SearchViewModelDelegate {
     func reloadSearch(empty: Bool)
     func reloadSaved(empty: Bool)
+    func display(current: Geocoding)
 }
 
 class SearchViewModel: NSObject{
@@ -19,6 +21,7 @@ class SearchViewModel: NSObject{
     var result: [Geocoding]?
     var isSearching: Bool = false
     var delegate: SearchViewModelDelegate?
+    let locManager = CLLocationManager()
     
     override init() {
         super.init()
@@ -26,6 +29,8 @@ class SearchViewModel: NSObject{
     }
     
     func setup(){
+        locManager.requestWhenInUseAuthorization()
+        locManager.requestAlwaysAuthorization()
         displaySaved()
     }
     
@@ -46,6 +51,22 @@ class SearchViewModel: NSObject{
                     self.saved = saved
                     self.isSearching = false
                     self.delegate?.reloadSaved(empty: (saved.count == 0) ? true:false)
+                }
+            }
+        }
+    }
+    
+    func displayCurrent(){
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+                CLLocationManager.authorizationStatus() ==  .authorizedAlways
+        {
+            if let coordinate = locManager.location?.coordinate{
+                GeocodingService.shared.reverseGeocodingByCoordinate(lat: "\(coordinate.latitude)", lon: "\(coordinate.longitude)"){ (success, result, error, errorMessage, statusCode) in
+                    DispatchQueue.main.async {
+                        if result != nil, let r = result{
+                            self.delegate?.display(current: r)
+                        }
+                    }
                 }
             }
         }

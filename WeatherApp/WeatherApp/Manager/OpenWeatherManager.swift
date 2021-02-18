@@ -15,8 +15,7 @@ class OpenWeatherManager: NSObject {
 
     // MARK: - Call Api
     public func callApi(url: String, completion: @escaping (_ success:Bool, _ result: Data?, _ error: Error?, _ errorMessage: String?, _ statusCode: Int) -> Void) {
-        var url = url.replacingOccurrences(of: " ", with: "")
-        url = url.replacingOccurrences(of: "ø", with: "o")
+        guard var url = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         if let url = URL(string: url){
             var request = URLRequest(url: url)
             request.httpMethod = "GET"

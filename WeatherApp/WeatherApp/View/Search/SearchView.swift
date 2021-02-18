@@ -71,6 +71,7 @@ class SearchView: UIView{
     }
     
     @IBAction func btnGpsPressed(_ sender: Any) {
+        vm.displayCurrent()
     }
     
     class func showAlertView() -> SearchView{
@@ -98,6 +99,12 @@ extension SearchView: SearchViewModelDelegate{
                 self.tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
             }
         }
+    }
+    
+    func display(current: Geocoding) {
+        UserDefaults.addLocation(model: current)
+        searchDelegate?.display(model: current)
+        delegate?.closePopoverView()
     }
 }
 
