@@ -64,7 +64,7 @@ class SearchView: UIView{
     
     func setupTableView(){
         tableview.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
-        tableview.register(UINib(nibName: "SavedTableViewCell", bundle: nil), forCellReuseIdentifier: "SavedTableViewCell")
+        tableview.register(UINib(nibName: "SearchTableViewHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "SearchTableViewHeader")
         tableview.dataSource = self
         tableview.delegate = self
         tableview.tableFooterView = UIView()
@@ -163,5 +163,16 @@ extension SearchView: UITableViewDelegate, UITableViewDataSource{
             searchDelegate?.display(model: list[indexPath.row])
             delegate?.closePopoverView()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableview.dequeueReusableHeaderFooterView(withIdentifier: "SearchTableViewHeader") as! SearchTableViewHeader
+        header.reset()
+        header.loadData(isSearching: vm.isSearching)
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 32
     }
 }

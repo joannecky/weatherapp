@@ -24,6 +24,8 @@
 		93DC6D1625DAF4AB001DE95A /* OpenWeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DC6D1525DAF4AB001DE95A /* OpenWeatherManager.swift */; };
 		93DC6D1A25DAFF83001DE95A /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93DC6D1925DAFF83001DE95A /* MainViewController.xib */; };
 		93DC6D1C25DAFF93001DE95A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DC6D1B25DAFF93001DE95A /* MainViewController.swift */; };
+		F126FD0625DE5E3600463D47 /* SearchTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126FD0525DE5E3600463D47 /* SearchTableViewHeader.swift */; };
+		F126FD0E25DE5E6C00463D47 /* SearchTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = F126FD0D25DE5E6C00463D47 /* SearchTableViewHeader.xib */; };
 		F12942AB25DCE186001E9DD2 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12942AA25DCE186001E9DD2 /* SearchView.swift */; };
 		F12942B325DCE1F8001E9DD2 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F12942B225DCE1F8001E9DD2 /* SearchView.xib */; };
 		F12942B825DCE428001E9DD2 /* PopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F12942B725DCE428001E9DD2 /* PopoverView.xib */; };
@@ -84,6 +86,8 @@
 		93DC6D1525DAF4AB001DE95A /* OpenWeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherManager.swift; sourceTree = "<group>"; };
 		93DC6D1925DAFF83001DE95A /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		93DC6D1B25DAFF93001DE95A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		F126FD0525DE5E3600463D47 /* SearchTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewHeader.swift; sourceTree = "<group>"; };
+		F126FD0D25DE5E6C00463D47 /* SearchTableViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewHeader.xib; sourceTree = "<group>"; };
 		F12942AA25DCE186001E9DD2 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		F12942B225DCE1F8001E9DD2 /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
 		F12942B725DCE428001E9DD2 /* PopoverView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopoverView.xib; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 			children = (
 				93AC7EE625DD85B100AA70E0 /* WeatherCollectionViewCell.xib */,
 				93AC7EE925DD85E300AA70E0 /* WeatherCollectionViewCell.swift */,
+				F126FD0525DE5E3600463D47 /* SearchTableViewHeader.swift */,
+				F126FD0D25DE5E6C00463D47 /* SearchTableViewHeader.xib */,
 				93AC7EE225DD576A00AA70E0 /* SearchTableViewCell.swift */,
 				93AC7EE425DD5B0E00AA70E0 /* SearchTableViewCell.xib */,
 			);
@@ -469,6 +475,7 @@
 				93DC6CEF25DAF167001DE95A /* Preview Assets.xcassets in Resources */,
 				93DC6D1A25DAFF83001DE95A /* MainViewController.xib in Resources */,
 				93DC6CEC25DAF167001DE95A /* Assets.xcassets in Resources */,
+				F126FD0E25DE5E6C00463D47 /* SearchTableViewHeader.xib in Resources */,
 				F1BEA75425DE409E0039C2F6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,6 +509,7 @@
 				F1C895D325DBC3C80023D107 /* Geocoding.swift in Sources */,
 				93AC7EE325DD576A00AA70E0 /* SearchTableViewCell.swift in Sources */,
 				93AC7EED25DD873E00AA70E0 /* WeatherCollectionDisplayModel.swift in Sources */,
+				F126FD0625DE5E3600463D47 /* SearchTableViewHeader.swift in Sources */,
 				93AC7EE025DD547400AA70E0 /* SearchViewModel.swift in Sources */,
 				F1C895B625DB979F0023D107 /* Cloud.swift in Sources */,
 				93A2577A25DC4FC300A1800D /* MainViewModel.swift in Sources */,

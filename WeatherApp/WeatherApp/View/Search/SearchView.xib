@@ -37,7 +37,7 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="epb-ac-Ppg">
-                    <rect key="frame" x="0.0" y="35" width="414" height="774"/>
+                    <rect key="frame" x="0.0" y="45" width="414" height="764"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <color key="tintColor" systemColor="systemOrangeColor"/>
                 </tableView>
@@ -46,7 +46,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="epb-ac-Ppg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6CJ-FT-F8N"/>
-                <constraint firstItem="epb-ac-Ppg" firstAttribute="top" secondItem="yEd-Hg-SAN" secondAttribute="bottom" id="JCl-G0-4Eg"/>
+                <constraint firstItem="epb-ac-Ppg" firstAttribute="top" secondItem="yEd-Hg-SAN" secondAttribute="bottom" constant="10" id="JCl-G0-4Eg"/>
                 <constraint firstAttribute="trailing" secondItem="9Z0-Cj-9pj" secondAttribute="trailing" constant="10" id="Tzq-TW-7SN"/>
                 <constraint firstItem="9Z0-Cj-9pj" firstAttribute="leading" secondItem="yEd-Hg-SAN" secondAttribute="trailing" constant="10" id="W6t-G8-MSH"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="epb-ac-Ppg" secondAttribute="trailing" id="YXN-jm-ipw"/>
