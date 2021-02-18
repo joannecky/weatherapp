@@ -10,6 +10,7 @@ import UIKit
 
 protocol SearchViewDelegate {
     func display(model: Geocoding)
+    func display(alert: UIAlertController)
 }
 
 class SearchView: UIView{
@@ -105,6 +106,10 @@ extension SearchView: SearchViewModelDelegate{
         UserDefaults.addLocation(model: current)
         searchDelegate?.display(model: current)
         delegate?.closePopoverView()
+    }
+    
+    func display(alert: UIAlertController) {
+        searchDelegate?.display(alert: alert)
     }
 }
 

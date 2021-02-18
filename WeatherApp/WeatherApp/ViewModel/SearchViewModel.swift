@@ -13,6 +13,7 @@ protocol SearchViewModelDelegate {
     func reloadSearch(empty: Bool)
     func reloadSaved(empty: Bool)
     func display(current: Geocoding)
+    func display(alert: UIAlertController)
 }
 
 class SearchViewModel: NSObject{
@@ -65,6 +66,10 @@ class SearchViewModel: NSObject{
                     DispatchQueue.main.async {
                         if result != nil, let r = result{
                             self.delegate?.display(current: r)
+                        }else{
+                            let alert = UIAlertController(title: "Error", message:"No weather data in your current location", preferredStyle: UIAlertController.Style.alert)
+                            alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: nil))
+                            self.delegate?.display(alert: alert )
                         }
                     }
                 }

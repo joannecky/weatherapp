@@ -158,6 +158,10 @@ extension MainViewController: SearchViewDelegate{
     func display(model: Geocoding){
         vm.display(location: model)
     }
+    
+    func display(alert: UIAlertController){
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension MainViewController: MainViewModelDelegate{
