@@ -132,6 +132,7 @@ class MainViewController: UIViewController{
                 self.lblWelcome.isHidden = true
                 self.title = self.vm.location?.name
                 self.lblLocation.text = self.vm.location?.fullName()
+                self.lblLocation.textColor = UIColor.darkGray
                 self.lblDate.text = ""
                 self.lblWeatherTitle.text = self.vm.weather?.weather?.main
                 self.lblWeatherDesc.text = self.vm.weather?.weather?.desc
