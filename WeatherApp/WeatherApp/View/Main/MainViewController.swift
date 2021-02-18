@@ -196,9 +196,9 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:WeatherCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCollectionViewCell", for: indexPath) as! WeatherCollectionViewCell
         cell.reset()
-        if let model = self.vm.list?[indexPath.row]{
-            cell.loadData(model: model)
-        }
+          if let r = vm.list, r.indices.contains(indexPath.row){
+              cell.loadData(model: r[indexPath.row])
+          }
         return cell
     }
     

@@ -149,8 +149,8 @@ extension SearchView: UITableViewDelegate, UITableViewDataSource{
         }else{
             let cell = tableview.dequeueReusableCell(withIdentifier: "SavedTableViewCell") as! SavedTableViewCell
             cell.reset()
-            if let r = vm.saved?[indexPath.row]{
-                cell.loadData(model: r)
+            if let r = vm.saved, r.indices.contains(indexPath.row){
+                cell.loadData(model: r[indexPath.row])
             }
             return cell
         }
