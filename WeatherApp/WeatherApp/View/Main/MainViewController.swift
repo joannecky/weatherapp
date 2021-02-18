@@ -56,7 +56,7 @@ class MainViewController: UIViewController{
     
     // MARK: - Navigation Bar
     private func setupNavigationBar() {
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 255/255, green: 229/255, blue: 204/255, alpha: 1)
+        self.navigationController?.navigationBar.barTintColor = UIColor(named: "primaryColor")
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.alpha = 1
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
@@ -70,7 +70,7 @@ class MainViewController: UIViewController{
         itemButton.widthAnchor.constraint(equalToConstant: itemButton.frame.width).isActive = true
         itemButton.heightAnchor.constraint(equalToConstant: itemButton.frame.height).isActive = true
         itemButton.setImage(UIImage(named: "search")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
-        itemButton.tintColor = UIColor.systemOrange
+        itemButton.tintColor = UIColor(named: "secondaryColor")
         itemButton.addTarget(self, action: #selector(ClickSearchButton), for: .touchUpInside)
         itemButton.transform = CGAffineTransform(translationX: 5 , y: 0)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: itemButton)
@@ -80,7 +80,7 @@ class MainViewController: UIViewController{
         vMain.delegate = self
         vMain.dataSource = self
         vMain.register(UINib.init(nibName: "WeatherCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "WeatherCollectionViewCell")
-        vMain.backgroundColor = UIColor(red: 255/255, green: 229/255, blue: 204/255, alpha: 1)
+        vMain.backgroundColor = UIColor(named: "primaryColor")
         vMain.layer.cornerRadius = 5
     }
     

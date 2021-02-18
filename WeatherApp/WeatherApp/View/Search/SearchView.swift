@@ -55,7 +55,7 @@ class SearchView: UIView{
     }
     
     func setupSearchBar() {
-        self.btnGps.tintColor = UIColor.systemOrange
+        self.btnGps.tintColor = UIColor(named: "secondaryColor")
         self.btnGps.setImage(UIImage(named: "gps"), for: .normal)
         self.searchbar.delegate = self
         

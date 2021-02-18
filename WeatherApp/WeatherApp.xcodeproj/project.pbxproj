@@ -30,6 +30,7 @@
 		F12942AB25DCE186001E9DD2 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12942AA25DCE186001E9DD2 /* SearchView.swift */; };
 		F12942B325DCE1F8001E9DD2 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F12942B225DCE1F8001E9DD2 /* SearchView.xib */; };
 		F12942B825DCE428001E9DD2 /* PopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F12942B725DCE428001E9DD2 /* PopoverView.xib */; };
+		F1BEA75425DE409E0039C2F6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1BEA75625DE409E0039C2F6 /* InfoPlist.strings */; };
 		F1C8959425DB74680023D107 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C8959325DB74680023D107 /* CurrentWeather.swift */; };
 		F1C895A225DB973D0023D107 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C895A125DB973D0023D107 /* Coordinate.swift */; };
 		F1C895A725DB97530023D107 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C895A625DB97530023D107 /* Weather.swift */; };
@@ -92,6 +93,9 @@
 		F12942AA25DCE186001E9DD2 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		F12942B225DCE1F8001E9DD2 /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
 		F12942B725DCE428001E9DD2 /* PopoverView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopoverView.xib; sourceTree = "<group>"; };
+		F1BEA75525DE409E0039C2F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F1BEA76025DE42400039C2F6 /* en-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-CA"; path = "en-CA.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		F1BEA76225DE43440039C2F6 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F1C8959325DB74680023D107 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		F1C895A125DB973D0023D107 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		F1C895A625DB97530023D107 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 				93DC6CE525DAF164001DE95A /* AppDelegate.swift */,
 				93DC6CF025DAF167001DE95A /* LaunchScreen.storyboard */,
 				93DC6CF325DAF167001DE95A /* Info.plist */,
+				F1BEA75625DE409E0039C2F6 /* InfoPlist.strings */,
 				93DC6CED25DAF167001DE95A /* Preview Content */,
 			);
 			path = WeatherApp;
@@ -418,6 +423,9 @@
 		93DC6CDA25DAF164001DE95A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					d,
+				);
 				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Joanne Cheng";
@@ -442,6 +450,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"en-CA",
+				"en-AU",
 			);
 			mainGroup = 93DC6CD925DAF164001DE95A;
 			productRefGroup = 93DC6CE325DAF164001DE95A /* Products */;
@@ -469,6 +479,7 @@
 				931BDE3625DD9E3700942CDA /* SavedTableViewCell.xib in Resources */,
 				93DC6D1A25DAFF83001DE95A /* MainViewController.xib in Resources */,
 				93DC6CEC25DAF167001DE95A /* Assets.xcassets in Resources */,
+				F1BEA75425DE409E0039C2F6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +572,16 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		F1BEA75625DE409E0039C2F6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1BEA75525DE409E0039C2F6 /* en */,
+				F1BEA76025DE42400039C2F6 /* en-CA */,
+				F1BEA76225DE43440039C2F6 /* en-AU */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -568,6 +589,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -628,6 +650,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

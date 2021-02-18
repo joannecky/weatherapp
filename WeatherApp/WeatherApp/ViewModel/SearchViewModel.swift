@@ -6,7 +6,7 @@
 //  Copyright © 2021 Joanne Cheng. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 
 protocol SearchViewModelDelegate {
