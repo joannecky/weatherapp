@@ -18,7 +18,7 @@ protocol SearchViewModelDelegate {
 
 class SearchViewModel: NSObject{
     
-    var saved: [SavedDisplayModel]?
+    var saved: [Geocoding]?
     var result: [Geocoding]?
     var isSearching: Bool = false
     var delegate: SearchViewModelDelegate?
@@ -42,19 +42,9 @@ class SearchViewModel: NSObject{
     }
     
     func displaySaved(){
-        var saved: [SavedDisplayModel] = []
-        for location in UserDefaults.getLocationList(){
-            CurrentWeatherService.shared.getCurrentWeatherByCityName(cityName: location.fullName()){ (success, result, error, errorMessage, statusCode) in
-                DispatchQueue.main.async {
-                    if let r = result, let icon = r.weather?.icon, let temp = r.main?.temp {
-                        saved.append(SavedDisplayModel(icon: icon, city: location.fullName(), temp: temp))
-                    }
-                    self.saved = saved
-                    self.isSearching = false
-                    self.delegate?.reloadSaved(empty: (saved.count == 0) ? true:false)
-                }
-            }
-        }
+        self.saved = UserDefaults.getLocationList()
+        self.isSearching = false
+        self.delegate?.reloadSearch(empty: (saved?.count == 0) ? true:false)
     }
     
     func displayCurrent(){

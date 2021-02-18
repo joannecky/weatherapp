@@ -151,21 +151,18 @@ extension SearchView: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableview.dequeueReusableCell(withIdentifier: "SearchTableViewCell") as! SearchTableViewCell
+        cell.reset()
         if(vm.isSearching){
-            let cell = tableview.dequeueReusableCell(withIdentifier: "SearchTableViewCell") as! SearchTableViewCell
-            cell.reset()
             if let result = vm.result, result.indices.contains(indexPath.row){
                 cell.loadData(model: result[indexPath.row])
             }
-            return cell
         }else{
-            let cell = tableview.dequeueReusableCell(withIdentifier: "SavedTableViewCell") as! SavedTableViewCell
-            cell.reset()
-            if let r = vm.saved, r.indices.contains(indexPath.row){
-                cell.loadData(model: r[indexPath.row])
+            if let result = vm.saved, result.indices.contains(indexPath.row){
+                cell.loadData(model: result[indexPath.row])
             }
-            return cell
         }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -177,7 +174,7 @@ extension SearchView: UITableViewDelegate, UITableViewDataSource{
             }
         }else{
             for location in UserDefaults.getLocationList(){
-                if let saved = vm.saved, saved[indexPath.row].city == location.fullName(){
+                if let saved = vm.saved, saved[indexPath.row].fullName() == location.fullName(){
                     searchDelegate?.display(model: UserDefaults.getLocationList()[indexPath.row])
                     delegate?.closePopoverView()
                 }

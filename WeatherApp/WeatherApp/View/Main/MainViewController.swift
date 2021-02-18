@@ -10,6 +10,8 @@ import UIKit
 
 class MainViewController: UIViewController{
     
+    @IBOutlet weak var lblWelcome: UILabel!
+    
     @IBOutlet weak var vLocation: UIView!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblLocation: UILabel!
@@ -82,6 +84,9 @@ class MainViewController: UIViewController{
         vMain.register(UINib.init(nibName: "WeatherCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "WeatherCollectionViewCell")
         vMain.backgroundColor = UIColor(named: "primaryColor")
         vMain.layer.cornerRadius = 5
+        lblWelcome.text = "Welcome!\nLet's start by searching a location"
+        lblWelcome.numberOfLines = 0
+        lblWelcome.sizeToFit()
     }
     
     @objc private func ClickSearchButton() {
@@ -115,6 +120,7 @@ class MainViewController: UIViewController{
         reset()
         if vm.location != nil{
             DispatchQueue.main.async {
+                self.lblWelcome.isHidden = true
                 self.title = self.vm.location?.name
                 self.lblLocation.text = self.vm.location?.fullName()
                 self.lblDate.text = ""
