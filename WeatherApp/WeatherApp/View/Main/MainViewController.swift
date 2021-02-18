@@ -54,6 +54,9 @@ class MainViewController: UIViewController{
         setupNavigationBar()
         setupCollectionView()
         setupContent()
+        if(UserDefaults.getLocationList().count == 0){
+            lblWelcome.isHidden = false
+        }
     }
     
     // MARK: - Navigation Bar
