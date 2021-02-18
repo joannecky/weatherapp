@@ -18,8 +18,7 @@ protocol SearchViewModelDelegate {
 
 class SearchViewModel: NSObject{
     
-    var saved: [Geocoding]?
-    var result: [Geocoding]?
+    var list: [Geocoding]?
     var isSearching: Bool = false
     var delegate: SearchViewModelDelegate?
     let locManager = CLLocationManager()
@@ -36,15 +35,15 @@ class SearchViewModel: NSObject{
     }
     
     func displaySearch(result: [Geocoding]){
-        self.result = result
+        self.list = result
         self.isSearching = true
-        self.delegate?.reloadSearch(empty: (result.count == 0) ? true:false)
+        self.delegate?.reloadSearch(empty: (list?.count == 0) ? true:false)
     }
     
     func displaySaved(){
-        self.saved = UserDefaults.getLocationList()
+        self.list = UserDefaults.getLocationList()
         self.isSearching = false
-        self.delegate?.reloadSearch(empty: (saved?.count == 0) ? true:false)
+        self.delegate?.reloadSearch(empty: (list?.count == 0) ? true:false)
     }
     
     func displayCurrent(){

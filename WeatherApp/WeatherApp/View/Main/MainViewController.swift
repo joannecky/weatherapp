@@ -199,7 +199,11 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: collectionView.frame.size.width / CGFloat(self.vm.list?.count ?? 0), height: 75)
+        if UIApplication.shared.statusBarFrame.height == 44 {
+            return CGSize.init(width: collectionView.frame.size.width / CGFloat(self.vm.list?.count ?? 0), height: 75)
+        }else{
+            return CGSize.init(width: collectionView.frame.size.width / CGFloat(self.vm.list?.count ?? 0), height: 65)
+        }
         
     }
     

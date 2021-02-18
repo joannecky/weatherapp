@@ -143,43 +143,25 @@ extension SearchView: UISearchBarDelegate{
 
 extension SearchView: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(vm.isSearching){
-            return vm.result?.count ?? 0
-        }else{
-            return vm.saved?.count ?? 0
-        }
+        return vm.list?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableview.dequeueReusableCell(withIdentifier: "SearchTableViewCell") as! SearchTableViewCell
         cell.reset()
-        if(vm.isSearching){
-            if let result = vm.result, result.indices.contains(indexPath.row){
-                cell.loadData(model: result[indexPath.row])
-            }
-        }else{
-            if let result = vm.saved, result.indices.contains(indexPath.row){
-                cell.loadData(model: result[indexPath.row])
-            }
+        if let list = vm.list, list.indices.contains(indexPath.row){
+            cell.loadData(model: list[indexPath.row])
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if(vm.isSearching){
-            if let result = vm.result, result.indices.contains(indexPath.row){
-                UserDefaults.addLocation(model: result[indexPath.row])
-                searchDelegate?.display(model: result[indexPath.row])
-                delegate?.closePopoverView()
+        if let list = vm.list, list.indices.contains(indexPath.row){
+            if(vm.isSearching){
+                UserDefaults.addLocation(model: list[indexPath.row])
             }
-        }else{
-            for location in UserDefaults.getLocationList(){
-                if let saved = vm.saved, saved[indexPath.row].fullName() == location.fullName(){
-                    searchDelegate?.display(model: UserDefaults.getLocationList()[indexPath.row])
-                    delegate?.closePopoverView()
-                }
-            }
-            
+            searchDelegate?.display(model: list[indexPath.row])
+            delegate?.closePopoverView()
         }
     }
 }
