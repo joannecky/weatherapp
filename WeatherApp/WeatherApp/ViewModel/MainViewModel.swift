@@ -36,13 +36,13 @@ class MainViewModel: NSObject{
             self.weather = result
             var list:[WeatherCollectionDisplayModel] = []
             if let speed = self.weather?.wind?.speed{
-                list.append(WeatherCollectionDisplayModel(title: "Wind", desc: "\((String(round(speed/1000*60*60*10)/10))) km/h", remark: ""))
+                list.append(WeatherCollectionDisplayModel(title: "Wind", desc: String(round(speed/1000*60*60*10)/10), unit: "km/h", remark: ""))
             }
             if let humidity = self.weather?.main?.humidity{
-                list.append(WeatherCollectionDisplayModel(title: "Humidity", desc: "\(String(humidity)) %", remark: ""))
+                list.append(WeatherCollectionDisplayModel(title: "Humidity", desc: String(humidity), unit: "%", remark: ""))
             }
             if let rain = self.weather?.rain?.hr1{
-                list.append(WeatherCollectionDisplayModel(title: "rain", desc: "\((String(round(rain*10)/10))) mm/h", remark: ""))
+                list.append(WeatherCollectionDisplayModel(title: "Rain", desc: String(round(rain*10)/10), unit: "mm/h", remark: ""))
             }
             if list.count == 1{
                 list.first?.position = .only

@@ -18,12 +18,14 @@ enum WeatherCollectionDisplayModelPosition{
 class WeatherCollectionDisplayModel: NSObject {
     var title: String
     var desc: String
+    var unit: String
     var remark: String
     var position: WeatherCollectionDisplayModelPosition = .middle
 
-    init(title: String, desc: String, remark: String){
+    init(title: String, desc: String, unit: String, remark: String){
         self.title = title
         self.desc = desc
+        self.unit = unit
         self.remark = remark
     }
 }

@@ -41,7 +41,12 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     
     func loadData(model : WeatherCollectionDisplayModel) {
         self.lblTitle.text = model.title
-        self.lblDesc.text = model.desc
+        let desc = NSMutableAttributedString(string: model.desc, attributes: [NSAttributedString.Key.font:self.lblDesc.font.withSize(20)])
+        let unit = NSMutableAttributedString(string: " \(model.unit)", attributes: [NSAttributedString.Key.font:self.lblDesc.font.withSize(14)])
+        let result = NSMutableAttributedString()
+        result.append(desc)
+        result.append(unit)
+        self.lblDesc.attributedText = NSAttributedString(attributedString: result)
         self.lblRemark.text = model.remark
         if(model.position == .first){
             vLeftSeparator.isHidden = true
